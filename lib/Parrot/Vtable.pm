@@ -318,6 +318,9 @@ sub vtbl_embed {
 
         next if $@;
 
+        # these are internals-ish and should not be exposed
+        next if $name =~ m/^(destroy|mark|invoke)$/;
+
         my $signature = join( ', ', @sig );
         my $arguments = join( ', ', @args );
 
