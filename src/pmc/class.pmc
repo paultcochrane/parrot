@@ -1062,25 +1062,6 @@ if the class has been instantiated.
 
 /*
 
-=item C<void add_role(PMC *role)>
-
-Adds the supplied PMC to the list of roles for the class, provided there are
-no conflicts.
-
-=cut
-
-*/
-    VTABLE void add_role(PMC *role) {
-        const Parrot_Class_attributes * const _class = PARROT_CLASS(SELF);
-
-        /* Do the composition. */
-        Parrot_ComposeRole(INTERP, role,
-            _class->resolve_method, !PMC_IS_NULL(_class->resolve_method),
-           PMCNULL, 0, _class->methods, _class->roles);
-    }
-
-/*
-
 =item C<PMC *inspect_str(STRING *what)>
 
 Provides introspection of a specific piece of information about the class. The
@@ -2032,50 +2013,6 @@ Returns the roles array PMC.
         PMC * const ret_roles = SELF.inspect_str(CONST_STRING(INTERP, "roles"));
 
         RETURN(PMC *ret_roles);
-    }
-
-/*
-
-=item C<void add_role(PMC *role, PMC *exclude :optional :named("exclude"),
-PMC *alias :optional :named("alias"))>
-
-Composes a role into a class with the given exclusions and aliases.
-
-=cut
-
-*/
-    METHOD add_role(PMC *role,
-            PMC *exclude_method     :optional :named("exclude_method"),
-            int has_exclude_method  :opt_flag,
-            PMC *alias_method       :optional :named("alias_method"),
-            int has_alias_method    :opt_flag) {
-
-        Parrot_Class_attributes * const _class = PARROT_CLASS(SELF);
-
-        /* Add everything on the resolve list to the exclude list; if we have
-         * no exclude list, pass along the resolve list in its place if it has
-         * any methods listed in it. */
-        if (!has_exclude_method) {
-            if (VTABLE_elements(INTERP, _class->resolve_method) != 0) {
-                exclude_method     = _class->resolve_method;
-                has_exclude_method = 1;
-            }
-        }
-        else {
-            const int resolve_count = VTABLE_elements(INTERP, _class->resolve_method);
-            int i;
-
-            for (i = 0; i < resolve_count; ++i) {
-                STRING * const meth_name = VTABLE_get_string_keyed_int(INTERP,
-                    _class->resolve_method, i);
-                VTABLE_push_string(INTERP, exclude_method, meth_name);
-            }
-        }
-
-        /* Do the composition. */
-        Parrot_ComposeRole(INTERP, role, exclude_method, has_exclude_method,
-                           alias_method, has_alias_method,
-                           _class->methods, _class->roles);
     }
 
 /*

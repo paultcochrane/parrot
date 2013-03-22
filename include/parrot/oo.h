@@ -44,22 +44,6 @@ typedef enum {
 /* Don't modify between HEADERIZER BEGIN / HEADERIZER END.  Your changes will be lost. */
 
 PARROT_EXPORT
-void Parrot_ComposeRole(PARROT_INTERP,
-    ARGIN(PMC *role),
-    ARGIN(PMC *exclude),
-    int got_exclude,
-    ARGIN(PMC *alias),
-    int got_alias,
-    ARGIN(PMC *methods_hash),
-    ARGIN(PMC *roles_list))
-        __attribute__nonnull__(1)
-        __attribute__nonnull__(2)
-        __attribute__nonnull__(3)
-        __attribute__nonnull__(5)
-        __attribute__nonnull__(7)
-        __attribute__nonnull__(8);
-
-PARROT_EXPORT
 PARROT_WARN_UNUSED_RESULT
 PARROT_CANNOT_RETURN_NULL
 PMC* Parrot_ComputeMRO_C3(PARROT_INTERP, ARGIN(PMC *_class))
@@ -178,13 +162,6 @@ INTVAL Parrot_oo_register_type(PARROT_INTERP,
         __attribute__nonnull__(2)
         __attribute__nonnull__(3);
 
-#define ASSERT_ARGS_Parrot_ComposeRole __attribute__unused__ int _ASSERT_ARGS_CHECK = (\
-       PARROT_ASSERT_ARG(interp) \
-    , PARROT_ASSERT_ARG(role) \
-    , PARROT_ASSERT_ARG(exclude) \
-    , PARROT_ASSERT_ARG(alias) \
-    , PARROT_ASSERT_ARG(methods_hash) \
-    , PARROT_ASSERT_ARG(roles_list))
 #define ASSERT_ARGS_Parrot_ComputeMRO_C3 __attribute__unused__ int _ASSERT_ARGS_CHECK = (\
        PARROT_ASSERT_ARG(interp) \
     , PARROT_ASSERT_ARG(_class))
