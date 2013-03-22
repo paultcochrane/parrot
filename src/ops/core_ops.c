@@ -14491,15 +14491,11 @@ Parrot_dlfunc_p_p_s_s(opcode_t *cur_opcode, PARROT_INTERP) {
 
     ptr = Parrot_dyn_dlsym_str(interp, dl_handle, SREG(3));
     p = D2FPTR(ptr);
-    if ((p == NULLfunc)) {
+    {
         const char  * const  err = Parrot_dlerror();
 
         Parrot_warn(interp, PARROT_WARNINGS_UNDEF_FLAG, "Symbol '%Ss' not found: %s\n", SREG(3), err ? err : "unknown reason");
         PREG(1) = Parrot_pmc_new(interp, enum_class_Undef);
-    }
-    else {
-        PREG(1) = Parrot_pmc_new(interp, enum_class_NCI);
-        VTABLE_set_pointer_keyed_str(interp, PREG(1), SREG(4), F2DPTR(p));
     }
 
     PARROT_GC_WRITE_BARRIER(interp, CURRENT_CONTEXT(interp));
@@ -14518,15 +14514,11 @@ Parrot_dlfunc_p_p_sc_s(opcode_t *cur_opcode, PARROT_INTERP) {
 
     ptr = Parrot_dyn_dlsym_str(interp, dl_handle, SCONST(3));
     p = D2FPTR(ptr);
-    if ((p == NULLfunc)) {
+    {
         const char  * const  err = Parrot_dlerror();
 
         Parrot_warn(interp, PARROT_WARNINGS_UNDEF_FLAG, "Symbol '%Ss' not found: %s\n", SCONST(3), err ? err : "unknown reason");
         PREG(1) = Parrot_pmc_new(interp, enum_class_Undef);
-    }
-    else {
-        PREG(1) = Parrot_pmc_new(interp, enum_class_NCI);
-        VTABLE_set_pointer_keyed_str(interp, PREG(1), SREG(4), F2DPTR(p));
     }
 
     PARROT_GC_WRITE_BARRIER(interp, CURRENT_CONTEXT(interp));
@@ -14545,15 +14537,11 @@ Parrot_dlfunc_p_p_s_sc(opcode_t *cur_opcode, PARROT_INTERP) {
 
     ptr = Parrot_dyn_dlsym_str(interp, dl_handle, SREG(3));
     p = D2FPTR(ptr);
-    if ((p == NULLfunc)) {
+    {
         const char  * const  err = Parrot_dlerror();
 
         Parrot_warn(interp, PARROT_WARNINGS_UNDEF_FLAG, "Symbol '%Ss' not found: %s\n", SREG(3), err ? err : "unknown reason");
         PREG(1) = Parrot_pmc_new(interp, enum_class_Undef);
-    }
-    else {
-        PREG(1) = Parrot_pmc_new(interp, enum_class_NCI);
-        VTABLE_set_pointer_keyed_str(interp, PREG(1), SCONST(4), F2DPTR(p));
     }
 
     PARROT_GC_WRITE_BARRIER(interp, CURRENT_CONTEXT(interp));
@@ -14572,15 +14560,11 @@ Parrot_dlfunc_p_p_sc_sc(opcode_t *cur_opcode, PARROT_INTERP) {
 
     ptr = Parrot_dyn_dlsym_str(interp, dl_handle, SCONST(3));
     p = D2FPTR(ptr);
-    if ((p == NULLfunc)) {
+    {
         const char  * const  err = Parrot_dlerror();
 
         Parrot_warn(interp, PARROT_WARNINGS_UNDEF_FLAG, "Symbol '%Ss' not found: %s\n", SCONST(3), err ? err : "unknown reason");
         PREG(1) = Parrot_pmc_new(interp, enum_class_Undef);
-    }
-    else {
-        PREG(1) = Parrot_pmc_new(interp, enum_class_NCI);
-        VTABLE_set_pointer_keyed_str(interp, PREG(1), SCONST(4), F2DPTR(p));
     }
 
     PARROT_GC_WRITE_BARRIER(interp, CURRENT_CONTEXT(interp));
@@ -14599,15 +14583,11 @@ Parrot_dlfunc_p_p_s_p(opcode_t *cur_opcode, PARROT_INTERP) {
 
     ptr = Parrot_dyn_dlsym_str(interp, dl_handle, SREG(3));
     p = D2FPTR(ptr);
-    if ((p == NULLfunc)) {
+    {
         const char  * const  err = Parrot_dlerror();
 
         Parrot_warn(interp, PARROT_WARNINGS_UNDEF_FLAG, "Symbol '%Ss' not found: %s\n", SREG(3), err ? err : "unknown reason");
         PREG(1) = Parrot_pmc_new(interp, enum_class_Undef);
-    }
-    else {
-        PREG(1) = Parrot_pmc_new(interp, enum_class_NCI);
-        VTABLE_set_pointer_keyed(interp, PREG(1), PREG(4), F2DPTR(p));
     }
 
     PARROT_GC_WRITE_BARRIER(interp, CURRENT_CONTEXT(interp));
@@ -14626,15 +14606,11 @@ Parrot_dlfunc_p_p_sc_p(opcode_t *cur_opcode, PARROT_INTERP) {
 
     ptr = Parrot_dyn_dlsym_str(interp, dl_handle, SCONST(3));
     p = D2FPTR(ptr);
-    if ((p == NULLfunc)) {
+    {
         const char  * const  err = Parrot_dlerror();
 
         Parrot_warn(interp, PARROT_WARNINGS_UNDEF_FLAG, "Symbol '%Ss' not found: %s\n", SCONST(3), err ? err : "unknown reason");
         PREG(1) = Parrot_pmc_new(interp, enum_class_Undef);
-    }
-    else {
-        PREG(1) = Parrot_pmc_new(interp, enum_class_NCI);
-        VTABLE_set_pointer_keyed(interp, PREG(1), PREG(4), F2DPTR(p));
     }
 
     PARROT_GC_WRITE_BARRIER(interp, CURRENT_CONTEXT(interp));
@@ -14651,15 +14627,11 @@ Parrot_dlvar_p_p_s(opcode_t *cur_opcode, PARROT_INTERP) {
     }
 
     p = Parrot_dyn_dlsym_str(interp, dl_handle, SREG(3));
-    if ((p == NULL)) {
+    {
         const char  * const  err = Parrot_dlerror();
 
         Parrot_warn(interp, PARROT_WARNINGS_UNDEF_FLAG, "Symbol '%Ss' not found: %s\n", SREG(3), err ? err : "unknown reason");
         PREG(1) = Parrot_pmc_new(interp, enum_class_Undef);
-    }
-    else {
-        PREG(1) = Parrot_pmc_new(interp, enum_class_UnManagedStruct);
-        VTABLE_set_pointer(interp, PREG(1), p);
     }
 
     PARROT_GC_WRITE_BARRIER(interp, CURRENT_CONTEXT(interp));
@@ -14676,15 +14648,11 @@ Parrot_dlvar_p_p_sc(opcode_t *cur_opcode, PARROT_INTERP) {
     }
 
     p = Parrot_dyn_dlsym_str(interp, dl_handle, SCONST(3));
-    if ((p == NULL)) {
+    {
         const char  * const  err = Parrot_dlerror();
 
         Parrot_warn(interp, PARROT_WARNINGS_UNDEF_FLAG, "Symbol '%Ss' not found: %s\n", SCONST(3), err ? err : "unknown reason");
         PREG(1) = Parrot_pmc_new(interp, enum_class_Undef);
-    }
-    else {
-        PREG(1) = Parrot_pmc_new(interp, enum_class_UnManagedStruct);
-        VTABLE_set_pointer(interp, PREG(1), p);
     }
 
     PARROT_GC_WRITE_BARRIER(interp, CURRENT_CONTEXT(interp));
