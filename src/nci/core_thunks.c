@@ -17,7 +17,6 @@
 
 #include "parrot/parrot.h"
 #include "parrot/nci.h"
-#include "pmc/pmc_nci.h"
 
 
 #ifdef PARROT_IN_EXTENSION

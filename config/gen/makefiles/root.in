@@ -1784,7 +1784,6 @@ src/multidispatch$(O) : \
 	$(INC_DIR)/oplib/ops.h \
 	$(PARROT_H_HEADERS) \
 	$(INC_PMC_DIR)/pmc_nativepccmethod.h \
-	$(INC_PMC_DIR)/pmc_nci.h \
 	$(INC_PMC_DIR)/pmc_sub.h
 
 src/packfile/api$(O) : \
@@ -1973,18 +1972,15 @@ src/nci/api$(O) : src/nci/api.str \
 src/nci/core_thunks$(O) : src/nci/core_thunks.str \
 	src/nci/core_thunks.c \
 	$(PARROT_H_HEADERS) \
-	$(INC_PMC_DIR)/pmc_nci.h
 
 src/nci/libffi$(O) : src/nci/libffi.c \
 	$(PARROT_H_HEADERS) \
-	$(INC_PMC_DIR)/pmc_nci.h \
 	$(INC_PMC_DIR)/pmc_unmanagedstruct.h \
 	$(INC_PMC_DIR)/pmc_managedstruct.h \
 
 ## SUFFIX OVERRIDE
 src/nci/extra_thunks$(O) : \
 	$(PARROT_H_HEADERS) \
-	$(INC_PMC_DIR)/pmc_nci.h \
 	src/nci/extra_thunks.str \
 	src/nci/extra_thunks.c
 	$(CC) $(CFLAGS) @optimize::src/nci/extra_thunks.c@ @ccwarn::src/nci/extra_thunks.c@ \
@@ -1992,7 +1988,6 @@ src/nci/extra_thunks$(O) : \
 
 src/nci/libffi$(O) : src/nci/libffi.c \
 	$(PARROT_H_HEADERS) \
-	$(INC_PMC_DIR)/pmc_nci.h \
 	$(INC_PMC_DIR)/pmc_unmanagedstruct.h \
 	$(INC_PMC_DIR)/pmc_managedstruct.h
 
@@ -2020,7 +2015,6 @@ src/warnings$(O) : $(PARROT_H_HEADERS) src/warnings.c
 
 src/utils$(O) : \
 	$(PARROT_H_HEADERS) \
-	$(INC_PMC_DIR)/pmc_nci.h \
 	src/utils.c \
 	$(EXTEND_HEADERS)
 
@@ -3206,7 +3200,6 @@ bootstrap-nci : src/nci/core_thunks.nci src/nci/extra_thunks.nci
 
 ## SUFFIX OVERRIDE
 src/extra_nci_thunks$(O) : $(PARROT_H_HEADERS) src/extra_nci_thunks.c \
-	$(INC_PMC_DIR)/pmc_nci.h
 	$(CC) $(CFLAGS) @optimize::src/extra_nci_thunks.c@ @ccwarn::src/extra_nci_thunks.c@ @cc_shared@ -I$(@D)/. @cc_o_out@$@ -c src/extra_nci_thunks.c
 
 # emacs etags

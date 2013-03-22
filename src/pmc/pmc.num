@@ -36,47 +36,46 @@ retcontinuation.pmc    22
 exception_handler.pmc    23
 coroutine.pmc    24
 eval.pmc    25
-nci.pmc    26
 
 # scalars
 
 # base types
-float.pmc    27
-integer.pmc    28
-bigint.pmc    29
-complex.pmc    30
-string.pmc    31
+float.pmc    26
+integer.pmc    27
+bigint.pmc    28
+complex.pmc    29
+string.pmc    30
 
 # abstract perlscalar.pmc
-perlint.pmc    32
-perlstring.pmc    33
-perlundef.pmc    34
-boolean.pmc    35
+perlint.pmc    31
+perlstring.pmc    32
+perlundef.pmc    33
+boolean.pmc    34
 
-ref.pmc    36
-sharedref.pmc    37
+ref.pmc    35
+sharedref.pmc    36
 
 # arrays XXX this list isn't complete
 
-fixedintegerarray.pmc    38
-iterator.pmc    39
-perlarray.pmc    40
-pmcarray.pmc    41
-sarray.pmc    42
-constsarray.pmc    43
-fixedstringarray.pmc    44
+fixedintegerarray.pmc    37
+iterator.pmc    38
+perlarray.pmc    39
+pmcarray.pmc    40
+sarray.pmc    41
+constsarray.pmc    42
+fixedstringarray.pmc    43
 
 # hashes
-hash.pmc    45
-perlhash.pmc    46
-orderedhash.pmc    47
+hash.pmc    44
+perlhash.pmc    45
+orderedhash.pmc    46
 
 # other
 
-parrotclass.pmc    48
-parrotobject.pmc    49
+parrotclass.pmc    47
+parrotobject.pmc    48
 
-oplib.pmc    50
-opcode.pmc    51
+oplib.pmc    49
+opcode.pmc    50
 
-callcontext.pmc    52
+callcontext.pmc    51

@@ -41,7 +41,6 @@ them, with default behaviour.
 #include "parrot/multidispatch.h"
 #include "parrot/oplib/ops.h"
 #include "multidispatch.str"
-#include "pmc/pmc_nci.h"
 #include "pmc/pmc_nativepccmethod.h"
 #include "pmc/pmc_sub.h"
 #include "pmc/pmc_callcontext.h"
@@ -593,17 +592,6 @@ mmd_distance(PARROT_INTERP, ARGIN(PMC *pmc), ARGIN(PMC *arg_tuple))
             SETATTR_NativePCCMethod_mmd_multi_sig(interp, pmc, multi_sig);
         }
     }
-    else if (pmc->vtable->base_type == enum_class_NCI) {
-        GETATTR_NCI_multi_sig(interp, pmc, multi_sig);
-        if (PMC_IS_NULL(multi_sig)) {
-            STRING *long_sig;
-
-            GETATTR_NCI_long_signature(interp, pmc, long_sig);
-            multi_sig = mmd_build_type_tuple_from_long_sig(interp, long_sig);
-            PARROT_GC_WRITE_BARRIER(interp, pmc);
-            SETATTR_NCI_multi_sig(interp, pmc, multi_sig);
-        }
-    }
     else {
         PMC_get_sub(interp, pmc, sub);
 
@@ -970,9 +958,6 @@ Parrot_mmd_add_multi_from_long_sig(PARROT_INTERP,
     if (sub_obj->vtable->base_type == enum_class_NativePCCMethod) {
         SETATTR_NativePCCMethod_mmd_multi_sig(interp, sub_obj, multi_sig);
     }
-    else if (sub_obj->vtable->base_type == enum_class_NCI) {
-        SETATTR_NCI_multi_sig(interp, sub_obj, multi_sig);
-    }
     else if (VTABLE_isa(interp, sub_obj, sub_str)) {
         PMC_get_sub(interp, sub_obj, sub);
         sub->multi_signature = multi_sig;
@@ -1008,22 +993,6 @@ Parrot_mmd_add_multi_from_c_args(PARROT_INTERP,
     STRING *short_sig_str = Parrot_str_new_constant(interp, short_sig);
     PMC    *type_list     = Parrot_str_split(interp, comma, long_sig_str);
     STRING *ns_name       = VTABLE_get_string_keyed_int(interp, type_list, 0);
-
-    /* Create an NCI sub for the C function */
-    PMC    *sub_obj       = Parrot_pmc_new(interp, enum_class_NCI);
-    PMC    *multi_sig     = mmd_build_type_tuple_from_long_sig(interp,
-                                long_sig_str);
-
-    PARROT_GC_WRITE_BARRIER(interp, sub_obj);
-
-    VTABLE_set_pointer_keyed_str(interp, sub_obj, short_sig_str,
-                                    F2DPTR(multi_func_ptr));
-
-    /* Attach a type tuple array to the NCI sub for multi dispatch */
-    SETATTR_NCI_multi_sig(interp, sub_obj, multi_sig);
-
-    mmd_add_multi_to_namespace(interp, ns_name, sub_name_str, sub_obj);
-    mmd_add_multi_global(interp, sub_name_str, sub_obj);
 }
 
 /*
@@ -1051,26 +1020,6 @@ Parrot_mmd_add_multi_list_from_c_args(PARROT_INTERP,
     ASSERT_ARGS(Parrot_mmd_add_multi_list_from_c_args)
     INTVAL i;
     for (i = 0; i < elements; ++i) {
-        funcptr_t func_ptr  = mmd_info[i].func_ptr;
-
-        STRING   *sub_name  = mmd_info[i].multi_name;
-        STRING   *long_sig  = mmd_info[i].full_sig;
-        STRING   *short_sig = mmd_info[i].short_sig;
-        STRING   *ns_name   = mmd_info[i].ns_name;
-
-        /* Create an NCI sub for the C function */
-        PMC    *sub_obj       = Parrot_pmc_new(interp, enum_class_NCI);
-
-        PARROT_GC_WRITE_BARRIER(interp, sub_obj);
-
-        VTABLE_set_pointer_keyed_str(interp, sub_obj, short_sig,
-                                     F2DPTR(func_ptr));
-
-        /* Attach a type tuple array to the NCI sub for multi dispatch */
-        SETATTR_NCI_long_signature(interp, sub_obj, long_sig);
-
-        mmd_add_multi_to_namespace(interp, ns_name, sub_name, sub_obj);
-        mmd_add_multi_global(interp, sub_name, sub_obj);
     }
 }
 
