@@ -13,69 +13,67 @@ env.pmc    2
 perlenv.pmc    3
 key.pmc    4
 random.pmc    5
-unmanagedstruct.pmc    6
-managedstruct.pmc    7
-csub.pmc    8
-compiler.pmc    9
-exception.pmc    10
-version.pmc    11
-parrotio.pmc    12
-parrotlibrary.pmc    13
-constparrotlibrary.pmc    14
-parrotinterpreter.pmc    15
-parrotthread.pmc    16
-lexpad.pmc    17
-timer.pmc    18
-pointer.pmc    19
+csub.pmc    6
+compiler.pmc    7
+exception.pmc    8
+version.pmc    9
+parrotio.pmc    10
+parrotlibrary.pmc    11
+constparrotlibrary.pmc    12
+parrotinterpreter.pmc    13
+parrotthread.pmc    14
+lexpad.pmc    15
+timer.pmc    16
+pointer.pmc    17
 
 # sub and subroutine like pmcs
 
-sub.pmc    20
-continuation.pmc    21
-retcontinuation.pmc    22
-exception_handler.pmc    23
-coroutine.pmc    24
-eval.pmc    25
+sub.pmc    18
+continuation.pmc    19
+retcontinuation.pmc    20
+exception_handler.pmc    21
+coroutine.pmc    22
+eval.pmc    23
 
 # scalars
 
 # base types
-float.pmc    26
-integer.pmc    27
-bigint.pmc    28
-complex.pmc    29
-string.pmc    30
+float.pmc    24
+integer.pmc    25
+bigint.pmc    26
+complex.pmc    27
+string.pmc    38
 
 # abstract perlscalar.pmc
-perlint.pmc    31
-perlstring.pmc    32
-perlundef.pmc    33
-boolean.pmc    34
+perlint.pmc    29
+perlstring.pmc    30
+perlundef.pmc    31
+boolean.pmc    32
 
-ref.pmc    35
-sharedref.pmc    36
+ref.pmc    33
+sharedref.pmc    34
 
 # arrays XXX this list isn't complete
 
-fixedintegerarray.pmc    37
-iterator.pmc    38
-perlarray.pmc    39
-pmcarray.pmc    40
-sarray.pmc    41
-constsarray.pmc    42
-fixedstringarray.pmc    43
+fixedintegerarray.pmc    35
+iterator.pmc    36
+perlarray.pmc    37
+pmcarray.pmc    38
+sarray.pmc    39
+constsarray.pmc    40
+fixedstringarray.pmc    41
 
 # hashes
-hash.pmc    44
-perlhash.pmc    45
-orderedhash.pmc    46
+hash.pmc    42
+perlhash.pmc    43
+orderedhash.pmc    44
 
 # other
 
-parrotclass.pmc    47
-parrotobject.pmc    48
+parrotclass.pmc    45
+parrotobject.pmc    46
 
-oplib.pmc    49
-opcode.pmc    50
+oplib.pmc    47
+opcode.pmc    48
 
-callcontext.pmc    51
+callcontext.pmc    49

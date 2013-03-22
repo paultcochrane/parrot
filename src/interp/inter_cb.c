@@ -128,23 +128,6 @@ Parrot_make_cb(PARROT_INTERP, ARGMOD(PMC* sub), ARGIN(PMC* user_data),
      */
     Parrot_pmc_gc_register(interp, user_data);
 
-    /*
-     * Finally, the external lib awaits a function pointer.
-     * Create a PMC that points to Parrot_callback_C (or _D);
-     * it can be passed on with signature 'p'.
-     */
-    cb = Parrot_pmc_new(interp, enum_class_UnManagedStruct);
-    /*
-     * Currently, we handle only 2 types:
-     * _C ... user_data is 2nd parameter
-     * _D ... user_data is 1st parameter
-     */
-    if (type == 'C')
-        VTABLE_set_pointer(interp, cb, F2DPTR(Parrot_callback_C));
-    else
-        VTABLE_set_pointer(interp, cb, F2DPTR(Parrot_callback_D));
-    Parrot_pmc_gc_register(interp, cb);
-
     return cb;
 }
 
@@ -331,13 +314,6 @@ Parrot_run_callback(PARROT_INTERP,
 case_I:
         pasm_sig[1] = 'I';
         param = (void*) i_param;
-        break;
-      case 'p':
-        /* created a UnManagedStruct */
-        p_param = Parrot_pmc_new(interp, enum_class_UnManagedStruct);
-        VTABLE_set_pointer(interp, p_param, external_data);
-        pasm_sig[1] = 'P';
-        param = (void*) p_param;
         break;
       case 't':
         pasm_sig[1] = 'S';

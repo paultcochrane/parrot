@@ -113,7 +113,7 @@ Parrot_freeze_pbc_size(PARROT_INTERP, ARGIN(PMC *pmc), ARGIN(const PackFile_Cons
         ARGOUT(Hash **seen))
 {
     ASSERT_ARGS(Parrot_freeze_pbc_size)
-    PMC * const pf_pmc = Parrot_pmc_new(interp, enum_class_UnManagedStruct);
+    PMC * const pf_pmc = Parrot_pmc_new(interp, enum_class_Ptr);
     PMC *visitor, *pmc_result;
     DECL_CONST_CAST;
 
